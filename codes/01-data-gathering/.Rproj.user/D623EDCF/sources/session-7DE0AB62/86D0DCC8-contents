@@ -1,0 +1,33 @@
+---
+title: "API_Data_Gathering"
+output: html_document
+date: "2022-09-13"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+install.packages('educationdata')
+
+# install.packages('devtools') # if necessary
+devtools::install_github('UrbanInstitute/education-data-package-r')
+
+```
+```{r}
+library('educationdata')
+
+df <- get_education_data(level = 'schools', 
+                         source = 'ccd', 
+                         topic = 'enrollment', 
+                         subtopic = list('race', 'sex'),
+                         filters = list(year = 2008,
+                                        grade = 9:12),
+                         add_labels = TRUE)
+
+df
+```
+
+
+

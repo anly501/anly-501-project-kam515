@@ -1,0 +1,24 @@
+"0","library('educationdata')"
+"0",""
+"0","df <- get_education_data(level = 'schools', "
+"0","                         source = 'ccd', "
+"0","                         topic = 'enrollment', "
+"0","                         subtopic = list('race', 'sex'),"
+"0","                         filters = list(year = 2008,"
+"0","                                        grade = 9:12),"
+"0","                         add_labels = TRUE)"
+"2","
+Fetching data for schools/ccd/enrollment/2008/grade-9/race/sex/? ...
+"
+"2","Processing page 2 out of 33
+"
+"2","Processing page 3 out of 33
+"
+"2","Processing page 4 out of 33
+"
+"2","Processing page 5 out of 33
+"
+"2","Processing page 6 out of 33
+"
+"2","Processing page 7 out of 33
+"
