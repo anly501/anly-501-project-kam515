@@ -24,10 +24,11 @@ df <- get_education_data(level = 'school-districts',
                          source = 'ccd', 
                          topic = 'enrollment', 
                          subtopic = c("race", "sex"),
-                         filters = list(year = 2009),
+                         filters = list(year = 2009,
+                                        grade = 12),
                          add_labels = TRUE)
 
-write.csv(df, '2009-20_School_Enrollment_Data.csv', row.names = TRUE)
+write.csv(df, '2009-20_School_Enrollment_Data_12.csv', row.names = TRUE)
 ```
 
 
