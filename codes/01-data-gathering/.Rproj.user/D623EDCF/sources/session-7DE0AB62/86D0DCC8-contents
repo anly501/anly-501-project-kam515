@@ -24,7 +24,7 @@ df <- get_education_data(level = 'school-districts',
                          source = 'ccd', 
                          topic = 'enrollment', 
                          subtopic = c("race", "sex"),
-                         filters = list(year = 2009:2020),
+                         filters = list(year = 2009),
                          add_labels = TRUE)
 
 write.csv(df, '2009-20_School_Enrollment_Data.csv', row.names = TRUE)
