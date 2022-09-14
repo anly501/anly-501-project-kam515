@@ -9,24 +9,25 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
-install.packages('educationdata')
+# Installing packages necessary for this API
 
-# install.packages('devtools') # if necessary
+install.packages('educationdata')
 devtools::install_github('UrbanInstitute/education-data-package-r')
 
 ```
 ```{r}
+# Calling the library of this API
 library('educationdata')
 
-df <- get_education_data(level = 'schools', 
+# Calling the API for education data
+df <- get_education_data(level = 'school-districts', 
                          source = 'ccd', 
                          topic = 'enrollment', 
-                         subtopic = list('race', 'sex'),
-                         filters = list(year = 2008,
-                                        grade = 9:12),
+                         subtopic = c("race", "sex"),
+                         filters = list(year = 2009:2020),
                          add_labels = TRUE)
 
-df
+write.csv(df, '2009-20_School_Enrollment_Data.csv', row.names = TRUE)
 ```
 
 
