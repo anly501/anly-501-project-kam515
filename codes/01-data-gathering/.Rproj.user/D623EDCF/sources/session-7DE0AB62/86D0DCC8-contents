@@ -20,10 +20,10 @@ devtools::install_github('UrbanInstitute/education-data-package-r')
 library('educationdata')
 
 # Calling the API for education data
-df <- get_education_data(level = 'school-districts', 
-                         source = 'ccd', 
-                         topic = 'enrollment', 
-                         subtopic = c("race", "sex"),
+df <- get_education_data(level = 'school-districts', # at the level of school districts (can also filter down to the school level)
+                         source = 'ccd', # the source is the core centralized data set (ccd) from the National Center for Education Statistics
+                         topic = 'enrollment', # enrollment data gives detailed insights into student enrollment at all schools in the district
+                         subtopic = c("race", "sex"), # the data is further broken down by race and sex
                          filters = list(year = 2009,
                                         grade = 12),
                          add_labels = TRUE)
