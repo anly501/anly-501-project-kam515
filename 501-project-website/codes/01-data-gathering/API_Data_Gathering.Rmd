@@ -1,0 +1,113 @@
+---
+title: "API_Data_Gathering"
+output: html_document
+date: "2022-09-13"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Installing packages necessary for this API
+
+install.packages('educationdata')
+devtools::install_github('UrbanInstitute/education-data-package-r')
+
+```
+```{r}
+# Calling the library of this API
+#library('educationdata')
+
+#pulling_data <- function(data){
+  
+#}
+  # Calling the API for education data
+#  df <- get_education_data(level = 'school-districts', # at the level of school districts (can also filter down to the school level)
+ #                          source = 'ccd', # the source is the core centralized data set (ccd) from the National Center for Education Statistics
+   #                        topic = 'enrollment', # enrollment data gives detailed insights into student enrollment at all schools in the district
+   #                        subtopic = c("race", "sex"), # the data is further broken down by race and sex
+     #                      filters = list(year = 2009,
+      #                                    grade = 12),
+       #                    add_labels = TRUE)
+  
+ # write.csv(df, '2009-20_School_Enrollment_Data_12.csv', row.names = TRUE)
+
+# Data to pull:
+  # level: school districts
+  # sources:
+  
+  
+  
+```
+
+
+```{r}
+# Calling the library of this API
+library('educationdata')
+
+
+query_function <- function(level, source, topic, file_name){
+  
+  if (topic=='NA'){
+    df <- get_education_data(level = level, 
+                           source = source, 
+                           add_labels = TRUE)
+    write_csv(df, file_name)
+  }
+  
+  if (topic != 'NA'){
+    df <- get_education_data(level = level, 
+                           source = source, 
+                           topic = topic, 
+                           add_labels = TRUE)
+    write_csv(df, file_name)
+  }
+  
+}
+
+
+```
+```{r}
+
+library(readr)
+
+
+arguments <- read.csv('/Users/katherinemead/Documents/GitHub/anly-501-project-kam515/codes/01-data-gathering/Urban_API_Endpoints - Sheet1.csv')
+
+# will re-try 4,5,6,7 later
+
+for (row in 25:27){
+  level_arg <- arguments$Level
+  source_arg <- arguments$Source
+  topic_arg <- arguments$Topic
+  l <- level_arg[row]
+  s <- source_arg[row]
+  t <- topic_arg[row]
+  f <- paste(l, s, t, '.csv', sep='_')
+  query_function(l,s,t,f)
+}
+
+
+
+```
+
+
+```{r}
+# Calling the library of this API
+#library('educationdata')
+
+# Calling the API for education data
+#df <- get_education_data(level = 'school-districts', # school districts or schools
+ #                        source = 'ccd', # the US gov. source
+  #                       topic = 'enrollment', 
+   #                      subtopic = c("race", "sex"), # the data is further broken down by race and sex
+    #                     filters = list(year = 2009,
+     #                                   grade = 12),
+      #                   add_labels = TRUE)
+
+#write.csv(df, '2009-20_School_Enrollment_Data_12.csv', row.names = TRUE)
+```
+
+
+
