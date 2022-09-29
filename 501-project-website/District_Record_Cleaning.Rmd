@@ -1,0 +1,45 @@
+---
+title: "District_Record_Cleaning"
+output: html_document
+date: "2022-09-28"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+
+enrollment_data <- read_csv('/Users/katherinemead/Documents/GitHub/anly-501-project-kam515/data/00-raw-data/2009-20_School_Enrollment_Data_12.csv')
+
+head(enrollment_data)
+
+```
+
+```{r}
+
+library(ggplot2)
+
+# Create a table with change in 
+
+race_freq_df <- select(enrollment_data, race, enrollment, year)
+
+# drop total from dataframe
+race_freq_df <- filter(race_freq_df, race!="Total")
+
+print(unique(race_freq_df$race))
+
+head(race_freq_df)
+
+
+
+
+# create line graph with year on X axis and enrollment on y axis w/ different colors for different races
+
+ggplot(race_freq_df, aes(x=date)) + 
+  geom_line(aes(y = psavert), color = "darkred") + 
+  geom_line(aes(y = uempmed), color="steelblue", linetype="twodash") 
+
+```
+
