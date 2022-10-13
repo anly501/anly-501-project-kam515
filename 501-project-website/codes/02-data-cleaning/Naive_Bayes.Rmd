@@ -1,0 +1,146 @@
+---
+title: "Naive_Bayes"
+output: html_document
+date: "2022-10-09"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(gmodels)
+library(e1071) 
+library(dplyr)
+```
+```{r}
+mydata=read.csv("/Users/katherinemead/Documents/Urban_Institute_Files/Csv_files/school-districts_ccd_directory_2007.csv")
+head(str(mydata))
+```
+
+```{r}
+df <- mydata %>% 
+    select_if(is.integer)
+
+col_names <- names(df)
+df[,col_names] <- lapply(df[,col_names] , factor)
+
+df
+```
+
+
+```{r}
+
+mydata <- df
+
+
+```
+
+```{r}
+summary(mydata)
+```
+
+```{r}
+#START DATA BREAKDOWN FOR HOLDOUT METHOD
+
+numpredictors=dim(mydata)[2]-1
+
+numfac=0
+
+for (i in 1:numpredictors) {
+  if ((is.factor(mydata[,i]))){
+    numfac=numfac+1} 
+}
+
+nobs=dim(mydata)[1]
+RNGkind(sample.kind = "Rounding")
+set.seed(1) #sets the seed for random sampling
+
+prop = prop.table(table(mydata$myresponse))
+length.vector = round(0.8*nobs*prop)
+train_size=sum(length.vector)
+test_size=nobs-train_size
+class.names = as.data.frame(prop)[,1]
+numb.class = length(class.names)
+resample=1
+
+#The 'while' conditional construct below breaks the data into testing(20%) and training(80%) sets assuring that the unique levels
+#of each of the categorical variables is the same in mydata, testing, and training sets. If for a particular partition
+#those levels do not match, then RStudio continues to perform 80-20 random splits untill such partition is found.
+
+
+while (resample==1) {
+  
+  train_index = c()
+  
+  for(i in 1:numb.class){
+    index_temp = which(mydata$myresponse==class.names[i])
+    train_index_temp = sample(index_temp, length.vector[i], replace = F)
+    train_index = c(train_index, train_index_temp)
+  }
+  
+  mydata_train=mydata[train_index,] #randomly select the data for training set using the row numbers generated above
+  mydata_test=mydata[-train_index,]#everything not in the training set should go into testing set
+  
+  right_fac=0 #denotes the number of factors with "right" distributions (i.e. - the unique levels match across mydata, test, and train data sets)
+  
+  for (i in 1:numpredictors) {
+    if (is.factor(mydata_train[,i])) {
+      if (setequal(intersect(as.vector(unique(mydata_train[,i])), as.vector(unique(mydata_test[,i]))),as.vector(unique(mydata[,i])))==TRUE)
+        right_fac=right_fac+1
+    }
+  }
+  
+  if (right_fac==numfac) (resample=0) else (resample=1)
+  
+}  
+
+test_predictors=mydata_test
+test_predictors$myresponse=NULL
+myresponse_test=as.data.frame(mydata_test$myresponse)
+colnames(myresponse_test)="myresponse"
+str(test_predictors)
+str(myresponse_test)
+
+dim(mydata_test) #confirms that testing data has only 20% of observations
+dim(mydata_train) #confirms that training data has 80% of observations
+
+#END DATA BREAKDOWN FOR HOLDOUT METHOD
+
+
+#START NAIVE BAYES
+
+model=naiveBayes(myresponse ~ .,data=mydata_train)
+pred=predict(model, test_predictors)
+tbl=as.data.frame(table(myresponse_test$myresponse,pred))
+percent_correct=round(100*sum(tbl[which(tbl$Var1==tbl$pred),3])/dim(mydata_test)[1],2)
+
+#END NAIVE BAYES
+
+
+print(paste("Percentage of Correct Classifications for Naive Bayes is:",percent_correct, "percent")) 
+
+Confusion_Matrix=CrossTable(myresponse_test$myresponse,pred, dnn=c("True Class","Predicted Class"), prop.chisq=F,prop.t=F, prop.c=F, prop.r=F)
+
+
+#Start: Putting together the test data with the classifications
+
+for_export=cbind(mydata_test,pred)
+for_export$Naive_Bayes_Classification=for_export$pred
+for_export$pred=NULL
+
+View(for_export)
+
+#End: Putting together the test data with the classifications
+
+#model.full=naiveBayes(myresponse ~ .,data=mydata)
+#fresh_classifications=predict(model.full, fresh)
+#table_with_classifications=cbind(fresh,fresh_classifications)
+
+#############################################################################################
+##############################THIS IS THE END OF THE MACRO###################################
+#############################################################################################
+
+```
+

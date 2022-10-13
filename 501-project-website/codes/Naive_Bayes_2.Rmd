@@ -1,0 +1,127 @@
+---
+title: "Naive_Bayes_2"
+output: html_document
+date: "2022-10-11"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Loading packages
+library(e1071)
+library(caTools)
+library(caret)
+library ("dplyr")
+library('tibble')
+library('readr')
+```
+
+```{r}
+mydata=read.csv("/Users/katherinemead/Documents/Urban_Institute_Files/Csv_files/school-districts_ccd_directory_2007.csv")
+
+mydata[is.na(mydata)] = 0
+
+# if migrant students > 0, migrant students = yes
+small_df <- mydata %>% 
+  mutate(migrant_yes_no = if_else(mydata$migrant_students > 0, "Yes", "No"))
+
+
+# turn the following into factors: english_language_learners, enrollment, guidance_counselors_total_fte, instructional_aides_fte, lea_admin_support_staff_fte, lea_administrators_fte, librarian_specialists_fte, librarian_support_staff_fte, number_of_schools, other_staff_fte, school_admin_support_staff_fte, school_administrators_fte, school_counselors_fte, school_psychologists_fte, school_staff_total_fte, spec_ed_students, supervisory_union_number, support_staff_other_fte, support_staff_stu_wo_psych_fte, support_staff_students_fte, teachers_elementary_fte, teachers_kindergarten_fte, teachers_prek_fte, teachers_secondary_fte, teachers_total_fte, teachers_ungraded_fte
+
+df <- mydata %>% 
+    select(english_language_learners, enrollment, guidance_counselors_total_fte, instructional_aides_fte, lea_admin_support_staff_fte, lea_administrators_fte, librarian_specialists_fte, librarian_support_staff_fte, number_of_schools, other_staff_fte, school_admin_support_staff_fte, school_administrators_fte, school_counselors_fte, school_psychologists_fte, school_staff_total_fte, spec_ed_students, supervisory_union_number, support_staff_other_fte, support_staff_stu_wo_psych_fte, support_staff_students_fte, teachers_elementary_fte, teachers_kindergarten_fte, teachers_prek_fte, teachers_secondary_fte, teachers_total_fte, teachers_ungraded_fte)
+
+#col_names <- names(df)
+#df[,col_names] <- lapply(df[,col_names] , facto)
+
+# replace NA with zero
+df[is.na(df)] = 0
+
+# just return a df with migrant students Y/N plus all the factors
+df$migrantYN <- small_df$migrant_yes_no
+
+df
+
+```
+
+
+```{r}
+# Splitting data into train
+# and test data
+
+split <- sample.split(df, SplitRatio = 0.8)
+
+train_cl <- subset(df, split == "TRUE")
+
+test_cl <- subset(df, split == "FALSE")
+ 
+# Feature Scaling
+
+train_scale <- scale(train_cl[, 1:4])
+
+test_scale <- scale(test_cl[, 1:4])
+ 
+# Fitting Naive Bayes Model 
+# to training dataset
+
+set.seed(120)  # Setting Seed
+
+classifier_cl <- naiveBayes(migrantYN ~ ., data = train_cl)
+classifier_cl
+ 
+# Predicting on test data'
+
+y_pred <- predict(classifier_cl, newdata = test_cl)
+ 
+# Confusion Matrix
+
+cm <- table(test_cl$migrantYN, y_pred)
+cm
+ 
+# Model Evaluation
+confusionMatrix(cm)
+
+```
+
+```{r}
+table <- data.frame(cm)
+table
+```
+
+```{r}
+library(cvms)
+library(tibble)   # tibble()
+
+set.seed(1)
+```
+
+
+```{r}
+y_pred <- predict(classifier_cl, newdata = test_cl)
+ 
+# Confusion Matrix
+
+cm <- table(test_cl$migrantYN, y_pred)
+
+d_binomial <- tibble("target" = test_cl$migrantYN,
+                     "prediction" = y_pred)
+
+d_binomial
+
+basic_table <- table(d_binomial)
+
+cfm <- as_tibble(basic_table)
+
+plot_confusion_matrix(cfm, 
+                      target_col = "target", 
+                      prediction_col = "prediction",
+                      counts_col = "n")
+
+```
+
+
+
+
+
