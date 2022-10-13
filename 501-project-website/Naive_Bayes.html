@@ -57,22 +57,43 @@
 
         <h1>NAIVE BAYES</h1>
         
-        
+        <td>
+          <img src="3D_distance_matrix_wiki_crawl.png" width="320" height="300">
+    </td>
+    <td>
+      <img src="Distance_Matrix_Wiki_Crawl.png" width="320" height="300">
+    </td>
+    <td>
+      <img src="2D_Wiki_Crawl_Scatterplot.png" width="320" height="300">
+  </td> 
       <p>
         <b>Python:</b>
       </p>
       <p>
-        The above word cloud represents popular headlines in news organizations based in the United States. The keywords used were "K-12 education". Words that appear more frequently in the headlines are larger in size. The word cloud was created using the python package wordcloud. Additionally, a count vectorizer algorithm was used to create a word frequency table. The word frequency table is viewable on the GitHub code repository.
+        To better understand the overlap of the concept of district takeovers within the broader discourse around K-12 education, I performed a Wikipedia text analysis of the phrases “school district”, “school takeover”, and “education reform”. My goal was to see how these topics are perceived in the larger media concerned with education. Wikipedia is a decent source to explore perceptions because it is editable by anyone. 
     </p>
-    <td>
-        <img src="3D_distance_matrix_wiki_crawl.png" width="320" height="300">
-  </td>
-  <td>
-    <img src="Distance_Matrix_Wiki_Crawl.png" width="320" height="300">
-  </td>
-  <td>
-    <img src="2D_Wiki_Crawl_Scatterplot.png" width="320" height="300">
-</td>
+  <p>
+    A search was performed through the Wikipedia API to extract all titles and accompanying articles that appeared in search results for the search phrases. To prepare the data for analysis in Python, all punctuation and common stopwords like “the” were removed from the text. Sentiment analysis was performed on the remaining words in the text using the <a href="https://www.nltk.org/"></a>Natural Language Toolkit (NLTK)</a>. 
+</p>
+<p>
+  A search was performed through the Wikipedia API to extract all titles and accompanying articles that appeared in search results for the search phrases. To prepare the data for analysis in Python, all punctuation and common stopwords like “the” were removed from the text. Sentiment analysis was performed on the remaining words in the text using the <a href="https://www.nltk.org/"></a>Natural Language Toolkit (NLTK)</a>. 
+</p>
+<td>
+  <img src="/Users/katherinemead/Documents/GitHub/anly-501-project-kam515/501-project-website/Bayes_R_Confusion_Matrix.png" width="320" height="300">
+</td> 
+<p>
+  <b>R:</b>
+</p>
+<p>
+  One of my data science questions is concerned with differences in student performance based on subgroup membership. Subgroups captured in federally reported education datasets include students in poverty, racial group membership, tribal membership, English-language-learner status, disability status, migrant students, and guardian in armed forces status. 
+</p>
+<p>
+  I begin my analysis of these subgroups by creating a label for districts with migrant students. Any district with greater than zero migrant students was assigned a label of “yes”. The large majority of districts in the United States have no migrant students, but districts that have migrant students tend to have higher urbanization scores and tend to have well over zero migrant students. Naive Bayes can capture whether there is clear separability in these districts by training an algorithm to assign labels to districts. 
+</p>
+<p>
+  For analysis, 80% of the data was randomly assigned to the training condition and 20% to the testing condition. E1071, caTools, and caret libraries were used to perform Naive Bayes analysis (i.e. assigning a label to the test data). Results of the Naive Bayes analysis are shown in figure ***. There was an overall 90% accuracy rate in the model. Correct identification of non-migrant districts was 87% and migrant districts was **%. Given the small number of migrant districts, more analysis should be done to better understand how different these districts are in actuality.
+</p>
+
 </body>
 
 </html>
