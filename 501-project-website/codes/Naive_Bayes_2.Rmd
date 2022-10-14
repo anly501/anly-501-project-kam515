@@ -57,35 +57,42 @@ columns <- names(df)
 columns_tested <- columns[1:length(columns)-1]
 
 #for all the columns except migrantYN
+
+df_sum <- data.frame(matrix(ncol = 3, nrow = 0))
+colnames(df_sum) <- c('Measure', 'Migrant Status', 'Average per 1000 students')
+
 for (column in columns_tested){
-  av_p_p_migrant <- mean(df[df$migrantYN == 'Yes', "english_language_learners"])/migrant_enrollment
-  av_p_p_nonmigrant <- mean(df[df$migrantYN == 'No', "english_language_learners"])/non_migrant_enrollment
+  
+  # create mini dataframe 1
+  av_p_p_migrant <- round((mean(df[df$migrantYN == 'Yes', column])/migrant_enrollment)*1000, 0)
+  migrant_status = "Yes"
+  df_sum[nrow(df_sum) + 1,] = c(column, migrant_status, av_p_p_migrant)
+  
+  # create mini dataframe 2
+  av_p_p_migrant <- round((mean(df[df$migrantYN == 'No', column])/non_migrant_enrollment)*1000, 0)
+  migrant_status = "No"
+  df_sum[nrow(df_sum) + 1,] = c(column, migrant_status, av_p_p_migrant)
+
 }
 
 
-av_p_p_migrant <- mean(df[df$migrantYN == 'Yes', "english_language_learners"])/migrant_enrollment
-av_p_p_migrant
-av_p_p_nonmigrant <- mean(df[df$migrantYN == 'No', "english_language_learners"])/non_migrant_enrollment
-av_p_p_nonmigrant
-# per student
+df_sum <- df_sum[-c(3, 4, 19, 20, 51, 52), ]
+df_sum
+
 
 ```
-
-
 ```{r}
-# Stacked Bar graph of df
-
-# library
+ # library
 library(ggplot2)
+
+measure <- df_sum$Measure
+
+migrant_status <- df_sum$`Migrant Status` 
+avg_per_1000 <- df_sum$`Average per 1000 students`
  
-# create a dataset
-specie <- c(rep("sorgho" , 3) , rep("poacee" , 3) , rep("banana" , 3) , rep("triticum" , 3) )
-condition <- rep(c("normal" , "stress" , "Nitrogen") , 4)
-value <- abs(rnorm(12 , 0 , 15))
-data <- data.frame(specie,condition,value)
-data
 # Grouped
-ggplot(data, aes(fill=migrantYN, y=value, x=specie)) + 
+ggplot(df_sum, aes(fill=migrant_status, y=avg_per_1000, x=measure)) + coord_flip() +  
+  ggtitle("Strategies for Using Homework Solution and Mini-Lecture Screencasts") +
     geom_bar(position="dodge", stat="identity")
 ```
 
