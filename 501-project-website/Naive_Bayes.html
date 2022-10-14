@@ -19,7 +19,7 @@
     <li><a href="./Homepage_website.html">ABOUT ME</a></li>
     
     <!-- tab without dropdown  -->
-    <li><a href="https://github.com/anly501/anly-501-project-kam515">CODE</a></li>
+    <li><a href="https://github.com/anly501/anly-501-project-kam515/tree/main/501-project-website/codes">CODE</a></li>
 
     <!-- tab without dropdown  -->
     <li><a href="https://github.com/anly501/anly-501-project-kam515/tree/main/data/00-raw-data">DATA</a></li>
@@ -95,6 +95,12 @@
     <img src="Bayes_R_Confusion_Matrix.png" width="500" height="300" class = "center">
     <figcaption><b> Figure 4: Migrant District Confusion Matrix </b></figcaption>
   </figure>
+  <figure>
+    <img src="Districts_w_wo_migrant.png" width="500" height="300" class = "center">
+    <figcaption><b> Figure 5: Comparison of Districts with and without Migrant Students </b></figcaption>
+  </figure>
+
+  
   
 </td> 
 <p>
@@ -107,7 +113,7 @@
   I begin my analysis of these subgroups by creating a label for districts with migrant students. Any district with greater than zero migrant students was assigned a label of “yes”. The large majority of districts in the United States have no migrant students, but districts that have migrant students tend to have higher urbanization scores and tend to have well over zero migrant students. Naive Bayes can capture whether there is clear separability in these districts by training an algorithm to assign labels to districts. 
 </p>
 <p>
-  For analysis, 80% of the data was randomly assigned to the training condition and 20% to the testing condition. E1071, caTools, and caret libraries were used to perform Naive Bayes analysis (i.e. assigning a label to the test data). Results of the Naive Bayes analysis are shown in figure ***. There was an overall 90% accuracy rate in the model. Correct identification of non-migrant districts was 87% and migrant districts was **%. Given the small number of migrant districts, more analysis should be done to better understand how different these districts are in actuality.
+  For analysis, 80% of the data was randomly assigned to the training condition and 20% to the testing condition. E1071, caTools, and caret libraries were used to perform Naive Bayes analysis (i.e. assigning a label to the test data). Results of the Naive Bayes analysis are shown in figure 4. There was an overall 90% accuracy rate in the model. Correct identification of non-migrant districts was 87% and migrant districts was 0.7%. Given the small number of migrant districts, more analysis should be done to better understand how different these districts are in actuality.
 </p>
 
 </body>

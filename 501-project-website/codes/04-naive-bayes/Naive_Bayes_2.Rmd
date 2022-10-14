@@ -16,6 +16,7 @@ library(caret)
 library ("dplyr")
 library('tibble')
 library('readr')
+library(tidyverse)
 ```
 
 ```{r}
@@ -41,6 +42,41 @@ df[is.na(df)] = 0
 
 # just return a df with migrant students Y/N plus all the factors
 df$migrantYN <- small_df$migrant_yes_no
+
+
+names(df)[names(df) == "english_language_learners"] <- "English language learners"
+names(df)[names(df) == "enrollment"] <- "Enrollment"
+names(df)[names(df) == "guidance_counselors_total_fte"] <- "Guidance counselors"
+
+
+ˆdf %>%
+  rename(
+
+    guidance_counselors_total_fte = "Guidance counselors", 
+    instructional_aides_fte = "Instructional aides", 
+    lea_admin_support_staff_fte = "Administrative staff (LEA)", 
+    lea_administrators_fte = "Administrators (LEA)", 
+    librarian_specialists_fte = "Librarian specialists", 
+    librarian_support_staff_fte = "Librarian support staff", 
+    number_of_schools = "Number of schools", 
+    other_staff_fte = "Other staff", 
+    school_admin_support_staff_fte = "School admin. support staff", 
+    school_administrators_fte = "School administrators", 
+    school_counselors_fte = "School counselors", 
+    school_psychologists_fte = "School psychologists", 
+    school_staff_total_fte = "Total school staff", 
+    spec_ed_students = "Special education students", 
+    supervisory_union_number = "Supervisory unions", 
+    support_staff_other_fte = "Support staff (other)", 
+    support_staff_stu_wo_psych_fte = "Support staff without psychologist", 
+    support_staff_students_fte = "Support staff for students", 
+    teachers_elementary_fte = "Elementary teachers", 
+    teachers_kindergarten_fte = "Kindergarten teachers", 
+    teachers_prek_fte = "pre-K teachers", 
+    teachers_secondary_fte = "Secondary teachers", 
+    teachers_total_fte = "Total teachers", 
+    teachers_ungraded_fte = "Ungraded teachers"
+    )
 
 df
 
@@ -77,7 +113,8 @@ for (column in columns_tested){
 
 
 df_sum <- df_sum[-c(3, 4, 19, 20, 51, 52), ]
-df_sum
+
+
 
 
 ```
@@ -94,6 +131,23 @@ avg_per_1000 <- df_sum$`Average per 1000 students`
 ggplot(df_sum, aes(fill=migrant_status, y=avg_per_1000, x=measure)) + coord_flip() +  
   ggtitle("Strategies for Using Homework Solution and Mini-Lecture Screencasts") +
     geom_bar(position="dodge", stat="identity")
+```
+```{r}
+ # library
+library(ggplot2)
+ 
+# create a dataset
+Measure <- c("Total teachers", "Total teachers", "English language learners", "English language learners", "Special education students", "Special education students", "School administrators", "School administrators")
+Migrant_Students <- rep(c("Yes" , "No") , 4)
+Number_per_1000_students <- c(57, 65, 62, 49, 103, 124, 3, 3)
+data <- data.frame(measure, condition, value)
+ 
+# Grouped
+p <- ggplot(data, aes(fill=Migrant_Students, y=Number_per_1000_students, x=Measure)) + 
+    geom_bar(position="dodge", stat="identity", width = 0.5) + theme(axis.text.x = element_text(angle = 10))
+p + ggtitle("Comparison of Districts with and without Migrant Students") +
+  xlab("Measure") + ylab("Number per 1000 students") + theme(text = element_text(size = 14))
+
 ```
 
 
