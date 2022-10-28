@@ -56,6 +56,23 @@
     
     </ul>
 
+<h1>
+  Decision Trees
+</h1>
+
+<p>
+  Using the migrant dataset, a decision tree was created to better subset the data and find relevant features. The decision tree was created using the scikitlearn package in python. However, before beginning the decision tree algorithm, a heat map and confusion matrix were constructed to better view the general trends and separability of the data. The confusion matrix showed a 99% accuracy at correctly identifying migrant and non-migrant district data. A clear separability in migrant and non-migrant districts was an interesting finding, but the question that follows is...why?
+</p>
+<p>
+  To better ascertain why migrant school districts are so clearly different from migrant districts, a decision tree algorithm is a helpful choice because decision trees display which variables drive the separation of the data. In the code below, it is clear that the default decision tree had many layers and was therefore non-interpretable. Re-setting the max depth of the decision tree to three was much more helpful in determining which variables were most important in the separation of the data. The clearest indicator of a migrant district was having a larger number of non-teaching support staff. Second was having a greater number of teachers and thirdly was general support staff. It was interesting to see how the raw number of students (enrollment) was not in the top three variables. 
+<p>
+  In the future, a random forest analysis could be helpful at being more confident in which variables are most important in the separation of the data. A random forest algorithm works by creating many decision trees and then averaging the results. This is helpful because it reduces the variance of the decision tree and therefore makes the results more reliable.
+</p>
+
+<h1>
+  Code:
+</h1>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
