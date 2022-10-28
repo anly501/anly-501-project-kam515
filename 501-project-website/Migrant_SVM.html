@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+<head>
+    <title>501 project</title>
+
+    <!-- point to css stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+ 
+</head>
+
+<body>
+
+
+<!-- HEADER BAR -->
+<ul>
+    <!-- link back to homepage -->
+    <li><a href="./Homepage_website.html">ABOUT ME</a></li>
+    
+    <!-- tab without dropdown  -->
+    <li><a href="https://github.com/anly501/anly-501-project-kam515/tree/main/501-project-website/codes">CODE</a></li>
+
+    <!-- tab without dropdown  -->
+    <li><a href="https://github.com/anly501/anly-501-project-kam515/tree/main/data/00-raw-data">DATA</a></li>
+    
+    <!-- tab without dropdown  -->
+    <li><a href="./Introduction.html">INTRODUCTION</a></li>
+    
+    <!-- tab without dropdown  -->
+    <li><a href="./Data_Gathering.html">DATA GATHERING</a></li>
+    
+    <!-- tab without dropdown  -->
+    <li><a href="./Data_Cleaning.html">DATA CLEANING</a></li>
+
+    <!-- tab without dropdown  -->
+    <li><a href="./Data_Exploration.html">EXPLORING DATA</a></li>    
+
+    <!-- tab without dropdown  -->
+    <li><a href="./Naive_Bayes.html">NAIVE BAYES</a></li>
+
+    <!-- tab without dropdown  -->
+    <li><a href="./Migrant_Decision_Tree.html">DECISION TREES</a></li>
+
+    <!-- tab without dropdown  -->
+    <li><a href="./Homepage_website.html">SVM</a></li>
+
+    <!-- tab without dropdown  -->
+    <li><a href="./Homepage_website.html">CLUSTERING</a></li>
+
+    <!-- tab without dropdown  -->
+    <li><a href="./Homepage_website.html">ARM AND NETWORKING</a></li>
+
+    <!-- tab without dropdown  -->
+    <li><a href="../Homepage_website.html">CONCLUSION</a></li>
+    
+    </ul>
+    
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.247">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>migrant_svm</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="Migrant_SVM_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Migrant_SVM_files/libs/quarto-html/quarto.js"></script>
+<script src="Migrant_SVM_files/libs/quarto-html/popper.min.js"></script>
+<script src="Migrant_SVM_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Migrant_SVM_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Migrant_SVM_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Migrant_SVM_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Migrant_SVM_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Migrant_SVM_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Migrant_SVM_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="importing-relevant-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="importing-relevant-libraries">Importing Relevant Libraries</h2>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix, ConfusionMatrixDisplay</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>### Exploring the dataset.</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data and show forst 5 rows</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'/Users/katherinemead/Documents/GitHub/anly-501-project-kam515/501-project-website/codes/Migrant_Dataset.csv'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>English language learners</th>
+      <th>Enrollment</th>
+      <th>Guidance counselors</th>
+      <th>instructional_aides_fte</th>
+      <th>lea_admin_support_staff_fte</th>
+      <th>lea_administrators_fte</th>
+      <th>librarian_specialists_fte</th>
+      <th>librarian_support_staff_fte</th>
+      <th>number_of_schools</th>
+      <th>other_staff_fte</th>
+      <th>...</th>
+      <th>support_staff_other_fte</th>
+      <th>support_staff_stu_wo_psych_fte</th>
+      <th>support_staff_students_fte</th>
+      <th>teachers_elementary_fte</th>
+      <th>teachers_kindergarten_fte</th>
+      <th>teachers_prek_fte</th>
+      <th>teachers_secondary_fte</th>
+      <th>teachers_total_fte</th>
+      <th>teachers_ungraded_fte</th>
+      <th>migrantYN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-1</td>
+      <td>71</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>7</td>
+      <td>0</td>
+      <td>...</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-2</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>770</td>
+      <td>3790</td>
+      <td>8</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>2</td>
+      <td>7</td>
+      <td>3</td>
+      <td>5</td>
+      <td>0</td>
+      <td>...</td>
+      <td>134</td>
+      <td>0</td>
+      <td>10</td>
+      <td>111</td>
+      <td>24</td>
+      <td>1</td>
+      <td>89</td>
+      <td>225</td>
+      <td>-2</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>436</td>
+      <td>5647</td>
+      <td>15</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>2</td>
+      <td>13</td>
+      <td>4</td>
+      <td>15</td>
+      <td>0</td>
+      <td>...</td>
+      <td>294</td>
+      <td>0</td>
+      <td>17</td>
+      <td>180</td>
+      <td>38</td>
+      <td>5</td>
+      <td>167</td>
+      <td>390</td>
+      <td>-2</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>758</td>
+      <td>12479</td>
+      <td>32</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>2</td>
+      <td>17</td>
+      <td>17</td>
+      <td>16</td>
+      <td>0</td>
+      <td>...</td>
+      <td>744</td>
+      <td>0</td>
+      <td>45</td>
+      <td>447</td>
+      <td>101</td>
+      <td>9</td>
+      <td>457</td>
+      <td>1015</td>
+      <td>-2</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>368</td>
+      <td>8298</td>
+      <td>17</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>1</td>
+      <td>11</td>
+      <td>9</td>
+      <td>10</td>
+      <td>0</td>
+      <td>...</td>
+      <td>331</td>
+      <td>0</td>
+      <td>34</td>
+      <td>209</td>
+      <td>45</td>
+      <td>4</td>
+      <td>223</td>
+      <td>481</td>
+      <td>-2</td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 27 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop([<span class="st">'other_staff_fte'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop([<span class="st">'school_counselors_fte'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop([<span class="st">'school_psychologists_fte'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop([<span class="st">'school_staff_total_fte'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop([<span class="st">'support_staff_stu_wo_psych_fte'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Change YN to 1 and 0</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'migrantYN'</span>] <span class="op">=</span> df[<span class="st">'migrantYN'</span>].replace([<span class="st">'Yes'</span>], <span class="dv">1</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'migrantYN'</span>] <span class="op">=</span> df[<span class="st">'migrantYN'</span>].replace([<span class="st">'No'</span>], <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the dataframe into X and y and then split X and y into train and test sets.</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># name migrantYN as Y variable</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'migrantYN'</span>]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'migrantYN'</span>]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>df.drop([<span class="st">'migrantYN'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># split into train and test sets</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>x_train, x_test, y_train, y_test <span class="op">=</span> train_test_split(df, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>English language learners</th>
+      <th>Enrollment</th>
+      <th>Guidance counselors</th>
+      <th>instructional_aides_fte</th>
+      <th>lea_admin_support_staff_fte</th>
+      <th>lea_administrators_fte</th>
+      <th>librarian_specialists_fte</th>
+      <th>librarian_support_staff_fte</th>
+      <th>number_of_schools</th>
+      <th>school_admin_support_staff_fte</th>
+      <th>...</th>
+      <th>spec_ed_students</th>
+      <th>supervisory_union_number</th>
+      <th>support_staff_other_fte</th>
+      <th>support_staff_students_fte</th>
+      <th>teachers_elementary_fte</th>
+      <th>teachers_kindergarten_fte</th>
+      <th>teachers_prek_fte</th>
+      <th>teachers_secondary_fte</th>
+      <th>teachers_total_fte</th>
+      <th>teachers_ungraded_fte</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-1</td>
+      <td>71</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>7</td>
+      <td>-1</td>
+      <td>...</td>
+      <td>72</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>770</td>
+      <td>3790</td>
+      <td>8</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>2</td>
+      <td>7</td>
+      <td>3</td>
+      <td>5</td>
+      <td>49</td>
+      <td>...</td>
+      <td>267</td>
+      <td>0</td>
+      <td>134</td>
+      <td>10</td>
+      <td>111</td>
+      <td>24</td>
+      <td>1</td>
+      <td>89</td>
+      <td>225</td>
+      <td>-2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>436</td>
+      <td>5647</td>
+      <td>15</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>2</td>
+      <td>13</td>
+      <td>4</td>
+      <td>15</td>
+      <td>79</td>
+      <td>...</td>
+      <td>665</td>
+      <td>0</td>
+      <td>294</td>
+      <td>17</td>
+      <td>180</td>
+      <td>38</td>
+      <td>5</td>
+      <td>167</td>
+      <td>390</td>
+      <td>-2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>758</td>
+      <td>12479</td>
+      <td>32</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>2</td>
+      <td>17</td>
+      <td>17</td>
+      <td>16</td>
+      <td>232</td>
+      <td>...</td>
+      <td>1007</td>
+      <td>0</td>
+      <td>744</td>
+      <td>45</td>
+      <td>447</td>
+      <td>101</td>
+      <td>9</td>
+      <td>457</td>
+      <td>1015</td>
+      <td>-2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>368</td>
+      <td>8298</td>
+      <td>17</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>1</td>
+      <td>11</td>
+      <td>9</td>
+      <td>10</td>
+      <td>79</td>
+      <td>...</td>
+      <td>824</td>
+      <td>0</td>
+      <td>331</td>
+      <td>34</td>
+      <td>209</td>
+      <td>45</td>
+      <td>4</td>
+      <td>223</td>
+      <td>481</td>
+      <td>-2</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 21 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the shape of the train and test sets, and levels of the depencent variable (Y) </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x_train.shape)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x_test.shape)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(y_train.shape)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(y_test.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(14459, 21)
+(3615, 21)
+(14459,)
+(3615,)</code></pre>
+</div>
+</div>
+</section>
+<section id="normalizing-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="normalizing-the-data">Normalizing the data</h2>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># normalize df</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>scaler.fit(x_train)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>x_train <span class="op">=</span> scaler.transform(x_train)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>x_test <span class="op">=</span> scaler.transform(x_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="svm-with-linear-kernels" class="level2">
+<h2 class="anchored" data-anchor-id="svm-with-linear-kernels">SVM with Linear kernels</h2>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import svc from sklearn.svm and classsification_report, confusion_matrix from sklearn.metrics.</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the classfier on the training data and predict on the test data. Set the classifier to be linear and C between 0.35-0.75. </span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report, confusion_matrix</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>target_names <span class="op">=</span> [<span class="st">'Yes'</span>, <span class="st">'No'</span>]</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># fit the classifier on the training data</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>svc_model <span class="op">=</span> SVC(kernel<span class="op">=</span><span class="st">'linear'</span>, C<span class="op">=</span><span class="fl">0.55</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># predict on the test data</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> SVC(C <span class="op">=</span> <span class="fl">0.5</span>, kernel<span class="op">=</span><span class="st">'linear'</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>model.fit(x_train, y_train)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>yp_train <span class="op">=</span> model.predict(x_train)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>yp_test <span class="op">=</span> model.predict(x_test)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>cm_train <span class="op">=</span> confusion_matrix(y_train, yp_train, labels<span class="op">=</span>model.classes_)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>cm_test <span class="op">=</span> confusion_matrix(y_test, yp_test, labels<span class="op">=</span>model.classes_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the confusion matrix and classification report for the train and test data. </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>model_report <span class="op">=</span> classification_report(y_train, yp_train, target_names <span class="op">=</span> target_names, output_dict<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the results in a data frame. </span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>report_df <span class="op">=</span> pd.DataFrame(model_report).transpose()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># display the results data frame</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>report_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>precision</th>
+      <th>recall</th>
+      <th>f1-score</th>
+      <th>support</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Yes</th>
+      <td>0.921289</td>
+      <td>1.000000</td>
+      <td>0.959032</td>
+      <td>13320.000000</td>
+    </tr>
+    <tr>
+      <th>No</th>
+      <td>1.000000</td>
+      <td>0.000878</td>
+      <td>0.001754</td>
+      <td>1139.000000</td>
+    </tr>
+    <tr>
+      <th>accuracy</th>
+      <td>0.921295</td>
+      <td>0.921295</td>
+      <td>0.921295</td>
+      <td>0.921295</td>
+    </tr>
+    <tr>
+      <th>macro avg</th>
+      <td>0.960645</td>
+      <td>0.500439</td>
+      <td>0.480393</td>
+      <td>14459.000000</td>
+    </tr>
+    <tr>
+      <th>weighted avg</th>
+      <td>0.927490</td>
+      <td>0.921295</td>
+      <td>0.883623</td>
+      <td>14459.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display Confusion Matrix for the test data. Remember to use the ConfusionMatrixDisplay function.</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> ConfusionMatrixDisplay(confusion_matrix <span class="op">=</span> cm_test,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                             display_labels<span class="op">=</span>model.classes_)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>plot.plot(ax<span class="op">=</span>ax, cmap<span class="op">=</span>plt.cm.Blues, values_format<span class="op">=</span><span class="st">'d'</span>, xticks_rotation<span class="op">=</span><span class="st">'vertical'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>&lt;sklearn.metrics._plot.confusion_matrix.ConfusionMatrixDisplay at 0x7fa297906310&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Migrant_SVM_files/figure-html/cell-12-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="svm-with-polynomial-kernels" class="level2">
+<h2 class="anchored" data-anchor-id="svm-with-polynomial-kernels">SVM with Polynomial kernels</h2>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import svc from sklearn.svm and classsification_report, confusion_matrix from sklearn.metrics.</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the classfier on the training data and predict on the test data. Set the classifier to be polynomial, C between 0.35-0.75, and degree = 2. </span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report, confusion_matrix </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>target_names <span class="op">=</span> [<span class="st">'Yes'</span>, <span class="st">'No'</span>]</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># predict on the test data</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> SVC(C <span class="op">=</span> <span class="fl">0.5</span>, kernel<span class="op">=</span><span class="st">'poly'</span>, degree<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>model.fit(x_train, y_train)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>yp_train <span class="op">=</span> model.predict(x_train)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>yp_test <span class="op">=</span> model.predict(x_test)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>cm_train <span class="op">=</span> confusion_matrix(y_train, yp_train, labels<span class="op">=</span>model.classes_)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>cm_test <span class="op">=</span> confusion_matrix(y_test, yp_test, labels<span class="op">=</span>model.classes_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the confusion matrix and classification report for the train and test data. </span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>model_report2 <span class="op">=</span> classification_report(y_train, yp_train, target_names <span class="op">=</span> target_names, output_dict<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the results in a data frame.</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>report_df2 <span class="op">=</span> pd.DataFrame(model_report2).transpose()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># display the results data frame</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>report_df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>precision</th>
+      <th>recall</th>
+      <th>f1-score</th>
+      <th>support</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Yes</th>
+      <td>0.924391</td>
+      <td>0.999550</td>
+      <td>0.960502</td>
+      <td>13320.000000</td>
+    </tr>
+    <tr>
+      <th>No</th>
+      <td>0.892857</td>
+      <td>0.043898</td>
+      <td>0.083682</td>
+      <td>1139.000000</td>
+    </tr>
+    <tr>
+      <th>accuracy</th>
+      <td>0.924269</td>
+      <td>0.924269</td>
+      <td>0.924269</td>
+      <td>0.924269</td>
+    </tr>
+    <tr>
+      <th>macro avg</th>
+      <td>0.908624</td>
+      <td>0.521724</td>
+      <td>0.522092</td>
+      <td>14459.000000</td>
+    </tr>
+    <tr>
+      <th>weighted avg</th>
+      <td>0.921907</td>
+      <td>0.924269</td>
+      <td>0.891431</td>
+      <td>14459.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display Confusion Matrix for the test data. Remember to use the ConfusionMatrixDisplay function.</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>), dpi<span class="op">=</span><span class="dv">150</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> ConfusionMatrixDisplay(confusion_matrix <span class="op">=</span> cm_test,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                             display_labels<span class="op">=</span>model.classes_)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>plot.plot(ax<span class="op">=</span>ax, cmap<span class="op">=</span>plt.cm.Blues, values_format<span class="op">=</span><span class="st">'d'</span>, xticks_rotation<span class="op">=</span><span class="st">'vertical'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>&lt;sklearn.metrics._plot.confusion_matrix.ConfusionMatrixDisplay at 0x7fa27d8a1400&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Migrant_SVM_files/figure-html/cell-17-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>## SVM with RBF kernels</p>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import svc from sklearn.svm and classsification_report, confusion_matrix from sklearn.metrics.</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the classfier on the training data and predict on the test data. Set the classifier to be linear and C between 0.35-0.75. </span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> SVC(C <span class="op">=</span> <span class="fl">0.5</span>, kernel<span class="op">=</span><span class="st">'rbf'</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>model.fit(x_train, y_train)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>yp_train <span class="op">=</span> model.predict(x_train)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>yp_test <span class="op">=</span> model.predict(x_test)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>cm_train <span class="op">=</span> confusion_matrix(y_train, yp_train, labels<span class="op">=</span>model.classes_)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>cm_test <span class="op">=</span> confusion_matrix(y_test, yp_test, labels<span class="op">=</span>model.classes_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the confusion matrix and classification report for the train and test data. </span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>model_report3 <span class="op">=</span> classification_report(y_train, yp_train, target_names <span class="op">=</span> target_names, output_dict<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the results in a data frame.</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>report_df3 <span class="op">=</span> pd.DataFrame(model_report3).transpose()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># display the results data frame</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>report_df3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>precision</th>
+      <th>recall</th>
+      <th>f1-score</th>
+      <th>support</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Yes</th>
+      <td>0.924183</td>
+      <td>0.998423</td>
+      <td>0.959870</td>
+      <td>13320.000000</td>
+    </tr>
+    <tr>
+      <th>No</th>
+      <td>0.695652</td>
+      <td>0.042142</td>
+      <td>0.079470</td>
+      <td>1139.000000</td>
+    </tr>
+    <tr>
+      <th>accuracy</th>
+      <td>0.923093</td>
+      <td>0.923093</td>
+      <td>0.923093</td>
+      <td>0.923093</td>
+    </tr>
+    <tr>
+      <th>macro avg</th>
+      <td>0.809918</td>
+      <td>0.520283</td>
+      <td>0.519670</td>
+      <td>14459.000000</td>
+    </tr>
+    <tr>
+      <th>weighted avg</th>
+      <td>0.906181</td>
+      <td>0.923093</td>
+      <td>0.890517</td>
+      <td>14459.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display Confusion Matrix for the test data. Remember to use the ConfusionMatrixDisplay function.</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>), dpi<span class="op">=</span><span class="dv">150</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> ConfusionMatrixDisplay(confusion_matrix <span class="op">=</span> cm_test,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                             display_labels<span class="op">=</span>model.classes_)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>plot.plot(ax<span class="op">=</span>ax, cmap<span class="op">=</span>plt.cm.Blues, values_format<span class="op">=</span><span class="st">'d'</span>, xticks_rotation<span class="op">=</span><span class="st">'vertical'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>&lt;sklearn.metrics._plot.confusion_matrix.ConfusionMatrixDisplay at 0x7fa27d9362b0&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Migrant_SVM_files/figure-html/cell-22-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>## SVM with Sigmoid kernels</p>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import svc from sklearn.svm and classsification_report, confusion_matrix from sklearn.metrics.</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the classfier on the training data and predict on the test data. Set the classifier to be linear and C between 0.35-0.75. </span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> SVC(C <span class="op">=</span> <span class="fl">0.5</span>, kernel<span class="op">=</span><span class="st">'sigmoid'</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>model.fit(x_train, y_train)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>yp_train <span class="op">=</span> model.predict(x_train)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>yp_test <span class="op">=</span> model.predict(x_test)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>cm_train <span class="op">=</span> confusion_matrix(y_train, yp_train, labels<span class="op">=</span>model.classes_)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>cm_test <span class="op">=</span> confusion_matrix(y_test, yp_test, labels<span class="op">=</span>model.classes_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the confusion matrix and classification report for the train and test data. </span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>model_report4 <span class="op">=</span> classification_report(y_train, yp_train, target_names <span class="op">=</span> target_names, output_dict<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the results in a data frame.</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>report_df4 <span class="op">=</span> pd.DataFrame(model_report4).transpose()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># display the results data frame</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>report_df4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>precision</th>
+      <th>recall</th>
+      <th>f1-score</th>
+      <th>support</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Yes</th>
+      <td>0.929071</td>
+      <td>0.946997</td>
+      <td>0.937948</td>
+      <td>13320.00000</td>
+    </tr>
+    <tr>
+      <th>No</th>
+      <td>0.199546</td>
+      <td>0.154522</td>
+      <td>0.174171</td>
+      <td>1139.00000</td>
+    </tr>
+    <tr>
+      <th>accuracy</th>
+      <td>0.884570</td>
+      <td>0.884570</td>
+      <td>0.884570</td>
+      <td>0.88457</td>
+    </tr>
+    <tr>
+      <th>macro avg</th>
+      <td>0.564309</td>
+      <td>0.550759</td>
+      <td>0.556060</td>
+      <td>14459.00000</td>
+    </tr>
+    <tr>
+      <th>weighted avg</th>
+      <td>0.871603</td>
+      <td>0.884570</td>
+      <td>0.877782</td>
+      <td>14459.00000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display Confusion Matrix for the test data. Remember to use the ConfusionMatrixDisplay function.</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>), dpi<span class="op">=</span><span class="dv">150</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> ConfusionMatrixDisplay(confusion_matrix <span class="op">=</span> cm_test,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>                             display_labels<span class="op">=</span>model.classes_)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>plot.plot(ax<span class="op">=</span>ax, cmap<span class="op">=</span>plt.cm.Blues, values_format<span class="op">=</span><span class="st">'d'</span>, xticks_rotation<span class="op">=</span><span class="st">'vertical'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<pre><code>&lt;sklearn.metrics._plot.confusion_matrix.ConfusionMatrixDisplay at 0x7fa27db69130&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Migrant_SVM_files/figure-html/cell-27-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
