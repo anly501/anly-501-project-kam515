@@ -34,6 +34,8 @@ small_df <- mydata %>%
 df <- mydata %>% 
     select(english_language_learners, enrollment, guidance_counselors_total_fte, instructional_aides_fte, lea_admin_support_staff_fte, lea_administrators_fte, librarian_specialists_fte, librarian_support_staff_fte, number_of_schools, other_staff_fte, school_admin_support_staff_fte, school_administrators_fte, school_counselors_fte, school_psychologists_fte, school_staff_total_fte, spec_ed_students, supervisory_union_number, support_staff_other_fte, support_staff_stu_wo_psych_fte, support_staff_students_fte, teachers_elementary_fte, teachers_kindergarten_fte, teachers_prek_fte, teachers_secondary_fte, teachers_total_fte, teachers_ungraded_fte)
 
+
+
 #col_names <- names(df)
 #df[,col_names] <- lapply(df[,col_names] , facto)
 
@@ -48,7 +50,7 @@ names(df)[names(df) == "english_language_learners"] <- "English language learner
 names(df)[names(df) == "enrollment"] <- "Enrollment"
 names(df)[names(df) == "guidance_counselors_total_fte"] <- "Guidance counselors"
 
-
+write.csv(df,"/Users/katherinemead/Documents/GitHub/anly-501-project-kam515/501-project-website/codes/Migrant_Dataset.csv", row.names = FALSE)
 
 ```
 
