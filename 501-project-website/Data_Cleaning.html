@@ -58,10 +58,38 @@
         <h1>DATA CLEANING</h1>
         
         <p>
-            State Takeover Dataset
+            <b>STEP 1:</b> Data Import
         </p>
         <p>
-            In searching for a comprehensive dataset of state takeovers of local school districts, it was not immediately clear what constituted a “takeover”. State takeovers have been permitted by Congress since the passage of No Child Left Behind (NCLB) in 2001. States may take over a school district if that district fails to meet Adequate Yearly Progress (AYP). However, it is up to states to act on this right to take over a district, and every state has different criteria for what constitutes Adequate Yearly Progress. It is generally agreed that districts taken over are underperforming on standardized tests, but many states do not choose to intervene with their low performing districts.
+            The REST API was used to gather data from the Urban Institute Education Data Explorer. The data was then converted to a csv file using the code linked in the data cleaning tab on GitHub. Python was used for this data import because R proved to reach processing capacity with importing this large of a dataset. The data was imported using the pandas library. 
+        </p>
+        <p>
+            <b>STEP 2:</b> Merging Data Sets
+        </p>
+        <p>
+            For most of the analysis, no datasets required merging because the data was already in one csv file. However, the different analyses required the other steps in cleaning, which is discussed further below.
+        <p>
+            <b>STEP 3:</b> Dealing with missing data
+        </p>
+        <p>
+            Firstly, all rows that did not have a school district ID (called LEA ID) were removed as this was the primary key used for all record data algorithms. Many school districts also had missing data for the number of students enrolled in the school district. This was also removed. The number of students enrolled was used to normalize the data, so this was a crucial piece of information to include. After this removal, the data was brought from approximately 18,000 rows to 16,000 rows. Next, a key variable: migrant status, was used so all rows that did not report having migrant students were assumed to have zero migrant students. Removing rows with missing data should be done sparingly, as it can lead to bias in the data. 
+        </p>
+        <p>
+            <b>STEP 4:</b> Normalization
+        </p>
+        <p>
+            The data was normalized using the number of students enrolled in the school district. This was done by dividing each numerical column by the number of students enrolled in the school district. This was done to normalize the data so that the number of students enrolled in the school district did not affect the results of the analysis.
+        </p>
+        <p>
+            <b>STEP 5:</b> Removing unneccessary columns
+        </p>
+        <p>
+            Several columns from the data set were removed because they were not needed for the analysis. These columns included the school district name, the county name, zip code, state, and a few columns relating to non-teaching staff that were not reported by over 90 percent of school districts.
+        <p>
+            <b>STEP 6:</b> Dealing with Outliers
+        </p>
+        <p>
+            Details about outliers
         </p>
 
 </body>
