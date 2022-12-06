@@ -1,0 +1,291 @@
+---
+title: "Naive_Bayes_2"
+output: html_document
+date: "2022-10-11"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Loading packages
+library(e1071)
+library(caTools)
+library(caret)
+library ("dplyr")
+library('tibble')
+library('readr')
+library(tidyverse)
+```
+
+```{r}
+# Importing the csv
+mydata=read.csv("/Users/katherinemead/Documents/Urban_Institute_Files/Csv_files/school-districts_ccd_directory_2007.csv")
+
+mydata[is.na(mydata)] = 0
+
+# if migrant students > 0, migrant students = yes
+small_df <- mydata %>% 
+  mutate(migrant_yes_no = if_else(mydata$migrant_students > 0, "Yes", "No"))
+
+
+# turn the following into factors: english_language_learners, enrollment, guidance_counselors_total_fte, instructional_aides_fte, lea_admin_support_staff_fte, lea_administrators_fte, librarian_specialists_fte, librarian_support_staff_fte, number_of_schools, other_staff_fte, school_admin_support_staff_fte, school_administrators_fte, school_counselors_fte, school_psychologists_fte, school_staff_total_fte, spec_ed_students, supervisory_union_number, support_staff_other_fte, support_staff_stu_wo_psych_fte, support_staff_students_fte, teachers_elementary_fte, teachers_kindergarten_fte, teachers_prek_fte, teachers_secondary_fte, teachers_total_fte, teachers_ungraded_fte
+
+df <- mydata %>% 
+    select(english_language_learners, enrollment, guidance_counselors_total_fte, instructional_aides_fte, lea_admin_support_staff_fte, lea_administrators_fte, librarian_specialists_fte, librarian_support_staff_fte, number_of_schools, other_staff_fte, school_admin_support_staff_fte, school_administrators_fte, school_counselors_fte, school_psychologists_fte, school_staff_total_fte, spec_ed_students, supervisory_union_number, support_staff_other_fte, support_staff_stu_wo_psych_fte, support_staff_students_fte, teachers_elementary_fte, teachers_kindergarten_fte, teachers_prek_fte, teachers_secondary_fte, teachers_total_fte, teachers_ungraded_fte)
+
+
+# replace NA with zero
+df[is.na(df)] = 0
+
+# just return a df with migrant students Y/N plus all the factors
+df$migrantYN <- small_df$migrant_yes_no
+
+
+names(df)[names(df) == "english_language_learners"] <- "English language learners"
+names(df)[names(df) == "enrollment"] <- "Enrollment"
+names(df)[names(df) == "guidance_counselors_total_fte"] <- "Guidance counselors"
+
+
+
+```
+
+```{r}
+# Replace negative values in column "x" with zeros
+df <- replace(df, df < 0, 0)
+
+head(df)
+```
+```{r}
+column_names <- colnames(df)
+
+# Find the position of the string in the vector
+pos <- grep("migrantYN", column_names)
+
+# Remove the string at that position from the vector
+column_names <- column_names[-pos]
+```
+
+
+```{r}
+# Load the tidyr and dplyr packages
+library(tidyr)
+library(dplyr)
+
+# Create a pivot table from the data frame
+df <- df %>%
+  group_by(migrantYN) %>%
+  summarize_at(vars(column_names), mean)
+
+
+
+```
+
+
+```{r}
+df
+```
+```{r}
+df[, -1] <- as.data.frame(apply(df[, -1], 2, as.integer))
+df
+```
+```{r}
+df <- subset(df, select = -c(other_staff_fte, school_staff_total_fte, support_staff_stu_wo_psych_fte, Enrollment, teachers_ungraded_fte, school_counselors_fte, school_psychologists_fte))
+df
+```
+```{r}
+# Load the required libraries
+library(ggplot2)
+
+names(df)[names(df) == "teachers_total_fte"] <- "Total Teachers"
+names(df)[names(df) == "teachers_secondary_fte"] <- "Secondary Teachers"
+names(df)[names(df) == "teachers_prek_fte"] <- "Pre-K Teachers"
+names(df)[names(df) == "teachers_kindergarten_fte"] <- "Kindergarten Teachers"
+names(df)[names(df) == "teachers_elementary_fte"] <- "Elementary Teachers"
+names(df)[names(df) == "support_staff_students_fte"] <- "Student Support Staff"
+names(df)[names(df) == "support_staff_other_fte"] <- "Other Support Staff"
+names(df)[names(df) == "supervisory_union_number"] <- "Supervisory Union Number"
+names(df)[names(df) == "spec_ed_students"] <- "Special Education Students"
+names(df)[names(df) == "school_administrators_fte"] <- "School Administrators"
+names(df)[names(df) == "school_admin_support_staff_fte"] <- "School Admin. Support Staff"
+names(df)[names(df) == "number_of_schools"] <- "Number of Schools"
+names(df)[names(df) == "librarian_support_staff_fte"] <- "Librarian Support Staff"
+names(df)[names(df) == "librarian_specialists_fte"] <- "Librarians"
+names(df)[names(df) == "lea_administrators_fte"] <- "District Administrators"
+names(df)[names(df) == "lea_admin_support_staff_fte"] <- "District Support Staff"
+names(df)[names(df) == "instructional_aides_fte"] <- "Instructional Aides"
+names(df)[names(df) == "librarian_specialists_fte"] <- "Librarians"
+names(df)[names(df) == "lea_administrators_fte"] <- "District Administrators"
+
+#names(df)[names(df) == "migrantYN"] <- "Migrant_Y_N"
+
+# Convert the data frame to long format
+df_long <- gather(df, key = "column", value = "value", -1)
+
+# Create the horizontal bar graph
+ggplot(data = df_long, aes(x = value, y = column, fill = migrantYN)) +
+  geom_bar(stat = "identity") + 
+  xlab("Value") +
+  ylab("Category") +
+  ggtitle("Comparison of Districts with and Without Migrant Students")
+
+```
+
+
+```{r}
+# create a new df with averages for migrant Y/N for all the variables
+
+migrant_enrollment <- mean(df[df$migrantYN == 'Yes', 'enrollment'])
+non_migrant_enrollment <- mean(df[df$migrantYN == 'No', 'enrollment'])
+
+
+columns <- names(df)
+columns_tested <- columns[1:length(columns)-1]
+
+#for all the columns except migrantYN
+
+df_sum <- data.frame(matrix(ncol = 3, nrow = 0))
+colnames(df_sum) <- c('Measure', 'Migrant Status', 'Average per 1000 students')
+
+for (column in columns_tested){
+  
+  # create mini dataframe 1
+  av_p_p_migrant <- round((mean(df[df$migrantYN == 'Yes', column])/migrant_enrollment)*1000, 0)
+  migrant_status = "Yes"
+  df_sum[nrow(df_sum) + 1,] = c(column, migrant_status, av_p_p_migrant)
+  
+  # create mini dataframe 2
+  av_p_p_migrant <- round((mean(df[df$migrantYN == 'No', column])/non_migrant_enrollment)*1000, 0)
+  migrant_status = "No"
+  df_sum[nrow(df_sum) + 1,] = c(column, migrant_status, av_p_p_migrant)
+
+}
+
+
+df_sum <- df_sum[-c(3, 4, 19, 20, 51, 52), ]
+
+rownames(df_sum) <- 1:nrow(df_sum) 
+
+str(df_sum)
+
+
+```
+```{r}
+ # library
+library(ggplot2)
+
+measure <- df_sum$Measure
+colnames(df_sum)
+
+migrant_status <- df_sum$`Migrant Status` 
+avg_per_1000 <- df_sum$`Average per 1000 students`
+
+df_sum[order(df_sum$`Average per 1000 students`),]
+
+
+# Grouped
+ggplot(df_sum, aes(fill=df_sum$`Migrant Status`, y=df_sum$`Average per 1000 students`, x=df_sum$Measure)) + coord_flip() +  
+  ggtitle("Strategies for Using Homework Solution and Mini-Lecture Screencasts") +
+    geom_bar(position="dodge", stat="identity")
+
+```
+
+```{r}
+ # library
+library(ggplot2)
+ 
+# create a dataset
+Measure <- c("Total teachers", "Total teachers", "English language learners", "English language learners", "Special education students", "Special education students", "School administrators", "School administrators")
+Migrant_Students <- rep(c("Yes" , "No") , 4)
+Number_per_1000_students <- c(57, 65, 62, 49, 103, 124, 3, 3)
+data <- data.frame(measure, condition, value)
+ 
+# Grouped
+p <- ggplot(data, aes(fill=Migrant_Students, y=Number_per_1000_students, x=Measure)) + 
+    geom_bar(position="dodge", stat="identity", width = 0.5) + theme(axis.text.x = element_text(angle = 10))
+p + ggtitle("Comparison of Districts with and without Migrant Students") +
+  xlab("Measure") + ylab("Number per 1000 students") + theme(text = element_text(size = 14))
+
+```
+
+
+
+```{r}
+# Splitting data into train
+# and test data
+
+split <- sample.split(df, SplitRatio = 0.8)
+
+train_cl <- subset(df, split == "TRUE")
+
+test_cl <- subset(df, split == "FALSE")
+ 
+# Feature Scaling
+
+train_scale <- scale(train_cl[, 1:4])
+
+test_scale <- scale(test_cl[, 1:4])
+ 
+# Fitting Naive Bayes Model 
+# to training dataset
+
+set.seed(120)  # Setting Seed
+
+classifier_cl <- naiveBayes(migrantYN ~ ., data = train_cl)
+classifier_cl
+ 
+# Predicting on test data'
+
+y_pred <- predict(classifier_cl, newdata = test_cl)
+ 
+# Confusion Matrix
+
+cm <- table(test_cl$migrantYN, y_pred)
+cm
+ 
+# Model Evaluation
+confusionMatrix(cm)
+
+```
+
+```{r}
+table <- data.frame(cm)
+table
+```
+
+```{r}
+library(cvms)
+library(tibble)   # tibble()
+
+set.seed(1)
+```
+
+
+```{r}
+y_pred <- predict(classifier_cl, newdata = test_cl)
+ 
+# Confusion Matrix
+
+cm <- table(test_cl$migrantYN, y_pred)
+
+d_binomial <- tibble("target" = test_cl$migrantYN,
+                     "prediction" = y_pred)
+
+d_binomial
+
+basic_table <- table(d_binomial)
+
+cfm <- as_tibble(basic_table)
+
+plot_confusion_matrix(cfm, 
+                      target_col = "target", 
+                      prediction_col = "prediction",
+                      counts_col = "n")
+
+```
+
+
+
+
+

@@ -61,10 +61,16 @@
             <b>STEP 1:</b> Data Import
         </p>
         <p>
+            Considering a large enough and accurate set of data is crucial for any data science project. Data scientists use a variety of methods to import data such as direct downloads, web scraping, and API calls. For this project, the data was imported using an API call and by consulting several research papers. These selections are discussed at length in the Data Gathering tab. Link to data gathering tab: <a href="./Data_Gathering.html">Data Gathering</a>
+        </p>
+        <p>
             The REST API was used to gather data from the Urban Institute Education Data Explorer. The data was then converted to a csv file using the code linked in the data cleaning tab on GitHub. Python was used for this data import because R proved to reach processing capacity with importing this large of a dataset. The data was imported using the pandas library. 
         </p>
         <p>
             <b>STEP 2:</b> Merging Data Sets
+        </p>
+        <p>
+            Depending on the scope of a project, it will usually be necessary for the data scientist to merge different data sets into one coherent spreadsheet, csv, or dataframe. In order to merge datasets, there must be a primary key that can be used to link the different data sets. For this project, the primary key was the school district ID, which was called LEA ID in the data set. 
         </p>
         <p>
             For most of the analysis, no datasets required merging because the data was already in one csv file. However, the different analyses required the other steps in cleaning, which is discussed further below.
@@ -72,24 +78,45 @@
             <b>STEP 3:</b> Dealing with missing data
         </p>
         <p>
+            Missing data is a common problem in data science. There are several ways to deal with missing data. The most common way is to remove the rows with missing data. However, this can lead to bias in the data. Another way to deal with missing data is to impute the missing data. This is done by using the mean, median, or mode of the data to fill in the missing data. This is a good way to deal with missing data, but it can also lead to bias in the data.
+        </p>
+        
+        <p>
             Firstly, all rows that did not have a school district ID (called LEA ID) were removed as this was the primary key used for all record data algorithms. Many school districts also had missing data for the number of students enrolled in the school district. This was also removed. The number of students enrolled was used to normalize the data, so this was a crucial piece of information to include. After this removal, the data was brought from approximately 18,000 rows to 16,000 rows. Next, a key variable: migrant status, was used so all rows that did not report having migrant students were assumed to have zero migrant students. Removing rows with missing data should be done sparingly, as it can lead to bias in the data. 
         </p>
         <p>
             <b>STEP 4:</b> Normalization
         </p>
         <p>
-            The data was normalized using the number of students enrolled in the school district. This was done by dividing each numerical column by the number of students enrolled in the school district. This was done to normalize the data so that the number of students enrolled in the school district did not affect the results of the analysis.
+            Normalization is a crucial step in data science. Normalization is the process of scaling the data so that it is on the same scale. This is done to make the data more comparable. For example, if one column of data is in the thousands and another column is in the hundreds, the thousands column will have a much larger impact on the results of the analysis. Normalization is done by dividing each column by the maximum value in that column. This will scale the data so that the maximum value in each column is 1. Normalization may or may not be desirable depending on the project, but it was important for most algorithms in this project as discussed below and in the later tabs.
+        </p>
+        <p>
+            The data was normalized using the number of students enrolled in the school district. This was done by dividing each numerical column by the number of students enrolled in the school district. This was done to normalize the data so that the number of students enrolled in the school district did not affect the results of the analysis. Still, on the next tab (data exploration), unnormalized data is shown to give a picture of the true counts of the appearances of the record data.
+        </p>
+        <p>
+            The text dataset was normalized by dividing the number of times a word appeared in a document by the total number of words in the document. This division was done to normalize the data so that the length of the document did not affect the results of the analysis. However, several of the algorithms did not require normalization because this was pre-built into the sci-kit-learn packages used.
         </p>
         <p>
             <b>STEP 5:</b> Removing unneccessary columns
         </p>
         <p>
+            In order to make the data more manageable, it is often necessary to remove columns that are not needed for the analysis. This is done to reduce the size of the data set and to make the data more manageable. 
+        </p>
+        <p>
             Several columns from the data set were removed because they were not needed for the analysis. These columns included the school district name, the county name, zip code, state, and a few columns relating to non-teaching staff that were not reported by over 90 percent of school districts.
+        </p>
+        <p>
+            For the text data, all English stopwords were removed which include words such as "the", "and", "or", etc. These words are not useful for the analysis and can be removed without affecting the results. It would not have been helpful to see the truly most frequent word "the" as this speaks to English grammar rather than educational discourse. Still, it is possible that the stopwords in the package did not adequately capture all unneccessary words, however, examination of the most frequent words in the results set did not include any obvious stopwords.
+        </p>
         <p>
             <b>STEP 6:</b> Dealing with Outliers
         </p>
         <p>
-            Details about outliers
+            Outliers are data points that are significantly different from the rest of the data. Outliers can be caused by a variety of reasons, such as human error, data entry error, or simply a data point that is truly different from the rest of the data. Outliers can be removed from the data set, but this may be problematic. For this project, no outliers were removed which is discussed below.
+        </p>
+        
+        <p>
+            There were no significant outliers in the school district dataset, perhaps because school districts do not vary largely in size, enrollment, and composition in students and staff. There were notably large school districts such as Los Angeles Unified School District, which had over 600,000 students enrolled. Perhaps obvious, this school district was not removed because it represents such a huge amount of not only migrant students but also students in the United States in general.
         </p>
 
 </body>
