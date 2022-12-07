@@ -89,17 +89,16 @@
             
         </p>
         <p>
-            Results:
+            From both text analysis and record analysis, Naive Bayes supported the notion that there is strong separability between districts with migrant students and districts without. This evidence can provide helpful information for policymakers: mostly that districts with migrant students do, in fact, use the extra federal funding provisions to hire personnel that support migrant students.
           </p>
+
           <p>
-            To better ascertain why migrant school districts are so clearly different from migrant districts, a decision tree algorithm is a helpful choice because decision trees display which variables drive the separation of the data. In the code below, it is clear that the default decision tree had many layers and was therefore non-interpretable. Re-setting the max depth of the decision tree to three was much more helpful in determining which variables were most important in the separation of the data. The clearest indicator of a migrant district was having a larger number of non-teaching support staff. Second was having a greater number of teachers and thirdly was general support staff. It was interesting to see how the raw number of students (enrollment) was not in the top three variables. 
+            To better ascertain why migrant school districts are so clearly different from migrant districts, a decision tree algorithm is a helpful choice because decision trees display which variables drive the separation of the data. In the code, it was clear that the default decision tree had many layers and was therefore non-interpretable. Re-setting the max depth of the decision tree to three was much more helpful in determining which variables were most important in the separation of the data. The clearest indicator of a migrant district was having a larger number of non-teaching support staff. Second was having a greater number of teachers and thirdly was general support staff. It was interesting to see how the raw number of students (enrollment) was not in the top three variables. 
           </p>
           
-          <h2>
-            Discussion:
-          </h2>
+
           <p>
-            In general, the decision tree supports the findings of the confusion matrix and other exploratory data analysis completed. The decision tree shows that the separation of the data is driven by the number of non-teaching support staff, teachers, and general support staff. The confusion matrix shows that the data is clearly separable and that the decision tree is a helpful tool in determining which variables are most important in the separation of the data. 
+            In general, the decision tree supported the findings of the confusion matrix and other exploratory data analysis completed. The decision tree showed that the separation of the data is driven by the number of non-teaching support staff, teachers, and general support staff. The confusion matrix shows that the data is clearly separable and that the decision tree is a helpful tool in determining which variables are most important in the separation of the data. 
           </p>  
           <p>
             In the future, a random forest analysis could be helpful at being more confident in which variables are most important in the separation of the data. A random forest algorithm works by creating many decision trees and then averaging the results. This is helpful because it reduces the variance of the decision tree and therefore makes the results more reliable.
