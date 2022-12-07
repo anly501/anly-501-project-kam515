@@ -55,67 +55,73 @@
     
     </ul>
     
-        <h1>INTRODUCTION</h1>
+        <h1>Conclusion</h1>
         
         <p>
-            What can we learn from state takeovers of low-performing school districts?
+            
         </p>
         <p>
-            K-12 education in the United States is the subject of renewed interest after the disruptions from the covid pandemic. Nearly all public schools in the United States were virtual for at least part of the 2020-2021 school year. Data is just beginning to emerge about the impacts of the pandemic on student learning. The National Assessment of Educational Progress (NAEP), a standardized test given to students in 4th, 8th, and 12th grade with no stakes attached, gives an early indication of the impacts. In two years, the average reading score for a 4th grader fell by five points which represents the largest drop since 1990 (Bloomberg). Math scores dropped seven points–the first decline in the history of the test (Bloomberg). These results show that the pandemic erased 20 years of student gains in reading and math (Bloomberg). There is no question that education worsened because of the pandemic, but the question that follows is…what now? How do we respond to this discouraging data? 
+            
         </p>
         <p>
-            Source: https://www.bloomberg.com/opinion/articles/2022-09-14/naep-results-show-pandemic-learning-loss-is-a-national-crisis 
+            
+        </p>
+            
+        <p>
+            
         </p>
         <p>
-            <image src="./NAEP_image.jpeg" alt="takeover" width="900" height="500">
+            
         </p>
         <p>
-            Source: https://www.the74million.org/article/nations-report-card-two-decades-of-growth-wiped-out-by-two-years-of-pandemic/ 
-        </p>
-        <p>
-            For this project, the state of education before the pandemic will be examined. We don’t know what the future holds for education, but the past can give us insight into what interventions have worked. Doing the best we can to serve students in response to the pandemic is not only the right thing to do, but it is critical for the future of our nation.
-        </p>
-        <p>
-            State takeovers of low performing school districts can provide insight into what interventions work to improve student learning. School improvement is a widely-debated issue, but the best indicator we have is student test scores. 
-        </p>
-        <p>
-            State takeovers have been permitted by Congress since the passage of No Child Left Behind (NCLB) in 2001. States may take over a school district if that district fails to meet Adequate Yearly Progress (AYP). There is no consistent definition of Adequate Yearly Progress, and state-to-state differences in enforcing AYP can be stark. 
+            
 
         </p>
         <p>
-            However, many states have chosen to take over entire school districts for a year. When this happens, the school board and superintendent are dismissed, and state officials manage all schools in the district. This drastic change in school leadership for one year can provide a natural experiment to study the impacts of changes made to the school system on student growth.
+            
         </p>
         <p>
-            For this exploratory data analysis, the following questions will be investigated:
+            
         </p>
+            
         <p>
-            1. What approaches to management distinguish successful state takeovers?
-        </p>
-        <p>
-            2. How is student engagement (truancy, advanced course participation, standardized test participation, etc.) affected by a state takeover? 
-        </p>
-            3. What does the general public have to say about K-12 education in the United States?
-        <p>
-        </p>
-            4. How are student test scores impacted by a state takeover?
-        <p>
-        </p>
-            5. How is control of a school system successfully returned to the local school system?
-        <p>    
-        </p>
-            6. How are students of particular subgroups (e.g. race, gender, socioeconomic status, disability status, etc.) impacted by different interventions?
-        <p> 
-        </p>
-            7. What happens to school finances before, during, and after successful state takeovers?
-        <p>
-        </p>
-            8. What changes to school staffing are associated with successful state takeovers?
-        <p>  
-        </p>
-            9. What can we learn from state takeovers to respond to the covid pandemic?
-        <p>    
-            10. What trends in student enrollment are associated with a state takeover?
 
+            
+        </p>
+        <p>
+            Results:
+          </p>
+          <p>
+            To better ascertain why migrant school districts are so clearly different from migrant districts, a decision tree algorithm is a helpful choice because decision trees display which variables drive the separation of the data. In the code below, it is clear that the default decision tree had many layers and was therefore non-interpretable. Re-setting the max depth of the decision tree to three was much more helpful in determining which variables were most important in the separation of the data. The clearest indicator of a migrant district was having a larger number of non-teaching support staff. Second was having a greater number of teachers and thirdly was general support staff. It was interesting to see how the raw number of students (enrollment) was not in the top three variables. 
+          </p>
+          
+          <h2>
+            Discussion:
+          </h2>
+          <p>
+            In general, the decision tree supports the findings of the confusion matrix and other exploratory data analysis completed. The decision tree shows that the separation of the data is driven by the number of non-teaching support staff, teachers, and general support staff. The confusion matrix shows that the data is clearly separable and that the decision tree is a helpful tool in determining which variables are most important in the separation of the data. 
+          </p>  
+          <p>
+            In the future, a random forest analysis could be helpful at being more confident in which variables are most important in the separation of the data. A random forest algorithm works by creating many decision trees and then averaging the results. This is helpful because it reduces the variance of the decision tree and therefore makes the results more reliable.
+          </p>
+        <p>
+            The results of the support vector machine were very similar to the results of the Naive Bayes analysis. The support vector machine was able to classify the data points with a high degree of accuracy. The support vector machine was able to classify the data points 88-93% of the time depending on the kernel used. This method further supports that US school districts with migrant students have key differences from districts without migrant students. The hyperplane was able to classify the data points with a high degree of accuracy. This method can be used to verify other methods and can be used to classify new data points.
+          </p>
+          <p>
+            Outside of this project, SVM can be used for other clustering scenarios, especially those with high dimensions.
+          </p>
+        <p>
+            The clustering algorithms used for this dataset were helpful in that they showed different ways in which the data could be clustered. More exploration is needed to better understand the trends that lead to the separation. Knowing these trends could help illuminate the reasons why migrant students are concentrated in certain areas.
+          </p>
+          <p>
+            Most of the resulting associations were predictable such as student and education. In general, the measure used in this study that proved most useful for the analysis was the exploratory word cloud. Although perhaps rudimentary and simple, seeing the most frequent words was most helpful for understanding the big picture of educational discourse. However, ARM has many other potential uses outside of this project worthy of exploration.
+          </p>
+          <p>
+            Outside of this project, ARM could be used to find associations between, for example, subgroups of students just like clustering. The advantage of ARM is the ability to visualize a network model and to be able to tweak the confidence and support to achieve the most useful results.
+          </p>
+        <p>
+            The ARM algorithm was used to find the most common rules in the Wikipedia dataset. The rules were then visualized using the network visualization. Overall, the results did not add any major insights to the project, but the visualization was further confirmation of previous exploratory analysis. The visualization was also a good way to see the relationships between the variables in the dataset.
+          
         </p>
 </body>
 
